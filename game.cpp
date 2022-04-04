@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-
+//  Конструктор.
 Game::Game()
 {
     resize(DOT_WIDTH * FIELD_WIDTH, DOT_HEIGHT * FIELD_HEIGHT);
@@ -12,6 +12,7 @@ Game::Game()
     initGame();
 }
 
+//  Таймер (движение игрового процесса).
 void Game::timerEvent(QTimerEvent *)
 {
     if (m_in_game)
@@ -21,9 +22,10 @@ void Game::timerEvent(QTimerEvent *)
         checkField();
     }
 
-    this->repaint();
+    this->repaint();  //  Перерисовать картинку.
 }
 
+//  Обработчик изменения направления змейки.
 void Game::keyPressEvent(QKeyEvent *event)
 {
     int key = event->key();
@@ -33,6 +35,7 @@ void Game::keyPressEvent(QKeyEvent *event)
     if (key == Qt::Key_Down && m_dir != directions::up)     { m_dir = directions::down; }
 }
 
+//  Отрисовка.
 void Game::paintEvent(QPaintEvent *e)
 {
     Q_UNUSED(e);
@@ -40,37 +43,39 @@ void Game::paintEvent(QPaintEvent *e)
     doDrawing();
 }
 
-//  Главная логика игры.
+//  Главная логика игры, отрисовка.
 void Game::doDrawing()
 {
     QPainter qp(this);
 
-    if (m_in_game)
+    if (m_in_game)  //  Пока не проиграли.
     {
         qp.setBrush(Qt::red);
 
         qp.drawEllipse(m_apple.x() * DOT_WIDTH, m_apple.y() * DOT_HEIGHT, DOT_WIDTH, DOT_HEIGHT);
 
+        //  Отрисовка змейки.
         for (int i = 0; i < m_dots.size(); i++)
         {
-            if (i == 0)
+            if (i == 0)  //  Отрисовка головы змейки.
             {
                 qp.setBrush(Qt::gray);
                 qp.drawEllipse(m_dots[i].x() * DOT_WIDTH, m_dots[i].y() * DOT_HEIGHT, DOT_WIDTH, DOT_HEIGHT);
             }
-            else
+            else  //  Отрисовка хвоста
             {
                 qp.setBrush(Qt::green);
                 qp.drawEllipse(m_dots[i].x() * DOT_WIDTH, m_dots[i].y() * DOT_HEIGHT, DOT_WIDTH, DOT_HEIGHT);
             }
         }
     }
-    else
+    else  //  Проигрышь.
     {
         gameOver();
     }
 }
 
+//  Спавн яблока.
 void Game::localApple()
 {
     QTime time = QTime::currentTime();
@@ -80,14 +85,17 @@ void Game::localApple()
     m_apple.ry() = qrand() % DOT_HEIGHT;
 }
 
+//  Движение змейки.
 void Game::move()
 {
 
+    //  Установка начальной позиции змейки.
     for (int i = m_dots.size() - 1; i > 0; i--)
     {
         m_dots[i] = m_dots[i-1];
     }
 
+    //  В зависимости от направления меняем координаты.
     switch (m_dir)
     {
     case left: {m_dots[0].rx() -= 1; break;}
@@ -97,6 +105,7 @@ void Game::move()
     }
 }
 
+//  Обработчик проигрышей.
 void Game::checkField()
 {
     //  Не съела ли змейка саму себя.
@@ -117,10 +126,11 @@ void Game::checkField()
 
     if (!m_in_game)
     {
-        killTimer(m_timer_id);
+        killTimer(m_timer_id);  //  Остановка таймера, в случае проигрыша.
     }
 }
 
+//  Функция проигрыша.
 void Game::gameOver()
 {
     QMessageBox msgb;
@@ -130,6 +140,7 @@ void Game::gameOver()
     initGame();
 }
 
+//  Проверка, съела ли змейка яблоко.
 void Game::checkApple()
 {
     if (m_apple == m_dots[0])
@@ -139,6 +150,7 @@ void Game::checkApple()
     }
 }
 
+//  Начальная инициализация игры.
 void Game::initGame()
 {
     m_in_game = true;
@@ -153,7 +165,6 @@ void Game::initGame()
     }
 
     localApple();
-
 
     m_timer_id = startTimer(DELAY);
 }
