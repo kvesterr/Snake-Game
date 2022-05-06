@@ -18,6 +18,7 @@ public:
     short getDirection() { return m_dir; }
     void setDirection(short dir) { m_dir = dir; }
     int getDelay() { return DELAY; }
+    void setDelay(int del) { DELAY = del; }
     int getScore() { return score; }
 
     bool isInGame() { return m_in_game; }
@@ -29,7 +30,7 @@ public:
     static const int DOT_HEIGHT = 30;
     static const int FIELD_WIDTH = 20;  //  Ширина и высота игрового поля.
     static const int FIELD_HEIGHT = 18;
-    static const int DELAY = 150;  //  Задержка обновления игрового процесса.
+    int DELAY = 148;  //  Задержка обновления игрового процесса. default: 148 (4 * 37)
 
 protected:
     void timerEvent(QTimerEvent*) override;
