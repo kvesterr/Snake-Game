@@ -7,47 +7,55 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QTime>
-#include <QMessageBox>
 
 class Game : public QWidget
 {
+
 public:
+
     Game();
+
+    short getDirection() { return m_dir; }
+    void setDirection(short dir) { m_dir = dir; }
+    int getDelay() { return DELAY; }
+    int getScore() { return score; }
+
+    bool isInGame() { return m_in_game; }
+
+    void initGame();
+
+
+    static const int DOT_WIDTH = 30;  //  Ширина и высота точки (части змейки).
+    static const int DOT_HEIGHT = 30;
+    static const int FIELD_WIDTH = 20;  //  Ширина и высота игрового поля.
+    static const int FIELD_HEIGHT = 18;
+    static const int DELAY = 150;  //  Задержка обновления игрового процесса.
 
 protected:
     void timerEvent(QTimerEvent*) override;
-    void keyPressEvent(QKeyEvent*) override;
     void paintEvent(QPaintEvent*) override;
 
 private:
-    static const int DOT_WIDTH = 20;  //  Ширина и высота точки (части змейки).
-    static const int DOT_HEIGHT = 20;
-    static const int FIELD_WIDTH = 20;  //  Ширина и высота игрового поля.
-    static const int FIELD_HEIGHT = 20;
-    static const int DELAY = 150;  //  Задержка обновления игрового процесса.
 
     void doDrawing();
     void localApple();
     void move();
     void checkField();
-    void gameOver();
     void checkApple();
+
+
+
+    short m_dir;  //  Поле направления. (0 - Up, 1 - Right, 2 - Down, 3 - Left);
 
     int m_timer_id;
 
     QPoint m_apple;
 
-    enum directions
-    {
-        left, right, up, down
-    };
-
-    directions m_dir;
-
     bool m_in_game;
     QVector<QPoint> m_dots;  //  Вектор содержащий информацию о положении змейки.
 
-    void initGame();
+    int score;
+
 };
 
 #endif // GAME_H
