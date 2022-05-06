@@ -199,6 +199,9 @@ QLabel {color: rgb(0, 0, 0)}</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_game_over">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -304,16 +307,142 @@ QLabel {color: 'white'}</string>
 Рекорд: </string>
     </property>
    </widget>
-   <zorder>title_label_2</zorder>
-   <zorder>title_label</zorder>
-   <zorder>button_start_game</zorder>
+   <widget class="QSlider" name="slider_difficulty">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>180</y>
+      <width>521</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSlider {background-color: rgba(0, 0, 0, 0)}
+QSlider {color: 'white'}</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_difficulty">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>140</y>
+      <width>361</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Myanmar Text</family>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {background-color: rgba(0, 0, 0, 0)}
+QLabel {color: 'white'}</string>
+    </property>
+    <property name="text">
+     <string>Скорость змейки:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_set_default">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>400</y>
+      <width>521</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {background-color: rgb(222, 222, 222)}</string>
+    </property>
+    <property name="text">
+     <string>Установить настройки по умолчанию</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_go_main_opt">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>490</y>
+      <width>521</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {background-color: rgb(222, 222, 222)}</string>
+    </property>
+    <property name="text">
+     <string>Вернуться в главное меню</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_reset_stat">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>310</y>
+      <width>521</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Yu Gothic</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {background-color: rgb(222, 222, 222)}</string>
+    </property>
+    <property name="text">
+     <string>Сбросить статистику</string>
+    </property>
+   </widget>
    <zorder>button_options</zorder>
+   <zorder>button_restart</zorder>
    <zorder>button_help</zorder>
    <zorder>button_exit</zorder>
-   <zorder>label_game_over</zorder>
-   <zorder>button_restart</zorder>
    <zorder>button_go_main_menu</zorder>
+   <zorder>button_reset_stat</zorder>
+   <zorder>button_set_default</zorder>
+   <zorder>label_game_over</zorder>
+   <zorder>button_start_game</zorder>
    <zorder>label_game_over_score</zorder>
+   <zorder>title_label_2</zorder>
+   <zorder>title_label</zorder>
+   <zorder>slider_difficulty</zorder>
+   <zorder>label_difficulty</zorder>
+   <zorder>button_go_main_opt</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
