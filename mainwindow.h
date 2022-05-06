@@ -43,7 +43,11 @@ private slots:
     void on_button_exit_clicked();
 
     void on_button_options_clicked();
-    
+
+    void on_button_go_main_opt_clicked();
+
+    void on_button_set_default_clicked();
+
 private:
     Ui::MainWindow *ui;
     Game *game;
