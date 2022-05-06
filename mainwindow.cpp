@@ -25,6 +25,12 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(game);
     ui->centralwidget->setLayout(layout);
 
+    //  Выбор 10 уровней сложности на слайдере.
+    ui->slider_difficulty->setMinimum(0);
+    ui->slider_difficulty->setMaximum(10);
+    ui->slider_difficulty->setTickPosition(QSlider::TicksBelow);
+    ui->slider_difficulty->setTickInterval(1);
+
     this->setFixedSize(621, 641);
 
     hideAll();
@@ -148,6 +154,13 @@ void MainWindow::hideAll()
     ui->button_restart->hide();
     ui->button_go_main_menu->hide();
     game_bar->hide();
+
+    //  Options.
+    ui->button_go_main_opt->hide();
+    ui->button_set_default->hide();
+    ui->button_reset_stat->hide();
+    ui->slider_difficulty->hide();
+    ui->label_difficulty->hide();
 }
 
 void MainWindow::showMainMenu()
@@ -201,6 +214,30 @@ void MainWindow::on_button_exit_clicked()
 //  Переход в раздел "Настройки"
 void MainWindow::on_button_options_clicked()
 {
-    
+    hideAll();
+
+    //  Title.
+    ui->title_label->show();
+    ui->title_label_2->show();
+
+    ui->button_go_main_opt->show();
+    ui->button_set_default->show();
+    ui->button_reset_stat->show();
+    ui->slider_difficulty->show();
+    ui->label_difficulty->show();
+}
+
+
+void MainWindow::on_button_go_main_opt_clicked()
+{
+    game->setDelay(600 / (ui->slider_difficulty->value() + 1));
+    qDebug() << game->getDelay();
+    on_button_go_main_menu_clicked();
+}
+
+
+void MainWindow::on_button_set_default_clicked()
+{
+    ui->slider_difficulty->setValue(3);
 }
 
